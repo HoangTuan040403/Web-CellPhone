@@ -1,0 +1,167 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*---------------------------------CSS PRODUCT--------------------------------------*/
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+}
+
+.price {
+    color: grey;
+    font-size: 22px;
+}
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+    .card button:hover {
+        opacity: 0.7;
+    }
+
+
+/* ------------------------------- CSS PHẦN FOOOTER --------------------------------------- */
+ul {
+    list-style: none;
+}
+
+.footer {
+    background-color: #dddddd;
+    padding: 50px 0;
+    margin: 20px 0px 0px 0px;
+    height: 280px;
+}
+
+
+.footer-item > h4 {
+    font-size: 18px;
+    color: #000000;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-item h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-item ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+    .footer-item ul li a:hover {
+        color: #ffffff;
+        padding-left: 8px;
+    }
+
+.footer-item .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: #7D7463;
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+    .footer-item .social-links a:hover {
+        color: #24262b;
+        background-color: #ffffff;
+    }
+
+/*responsive*/
+@media(max-width: 767px) {
+    .footer-item {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width: 574px) {
+    .footer-item {
+        width: 100%;
+    }
+}
+
+.all-right-reserved {
+    height: 50px;
+    width: 100%;
+    background-color: #7D7463;
+    text-align: center;
+    line-height: 3;
+    color: #000000;
+}
+
+
+
+.product-grid-style {
+    margin-top: -20px
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+}
+
+.product-grid-style > [class*="col-"] {
+    margin-top: 30px
+}
+
+.product-grid-style .product-img {
+    position: relative
+}
+
+    .product-grid-style .product-img img {
+        border-radius: 0.25rem
+    }
+
+.product-grid-style .product-details {
+    transition: all .3s ease 0s;
+    position: relative
+}
+
+.product-details .product-cart {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999
+}

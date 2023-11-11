@@ -1,0 +1,28 @@
+﻿@using Doanphanmem.Models
+@model IEnumerable<SanPham>
+@*san pham dd*@
+<div class="container-fluid mt-5">
+    <div class="container-fluid  p-3 text-center mt-4" style="background-color: #1A6DFF; color: white; font-size: 20px; font-weight: bold; ">Các Sản Phẩm Tương Tự</div>
+
+    <div class="row mt-3 p-5">
+        @foreach (var sp in Model)
+        {
+            <div class="col-sm-3 mb-4">
+                <div class="card">
+                    <a href="@Url.Action("SP_giamgia", "SanPhams", new { id = sp.MaSP })">
+                        <img src="~/Image/@sp.Hinh1" class="card-img-top" alt="Iphone">
+
+                        <div class="card-body">
+                            <h5 class="card-title">@sp.TenSP</h5>
+                            <p class="card-text">@sp.GiaSp</p>
+                            <div class="row">
+                            </div>
+                        </div>
+                    </a>
+                    <a style="margin-bottom:0px;" href="@Url.Action("AddProduct", "GioHang", new{ MaSP = sp.MaSP })">
+                        Đặt mua
+                    </a>
+                </div>
+            </div>
+        }
+    </div>

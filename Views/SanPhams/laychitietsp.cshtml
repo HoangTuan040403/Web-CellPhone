@@ -1,0 +1,109 @@
+﻿@using Doanphanmem.Models;
+@model SanPham
+@{
+    ViewBag.Title = "laychitietsp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://kit.fontawesome.com/383abdf887.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<div class="row">
+    <div id="carouselExampleIndicators" class="carousel slide col-6 ">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Image/@Model.Hinh1" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Image/@Model.Hinh2" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Image/@Model.Hinh3" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+    <div class="col-6">
+        <h2 class="pb-4">iPhone 14 Pro Max 128GB | Chính hãng VN/A</h2>
+        <h3 class="pb-2">Hãng : Samsung</h3>
+        <h4 class="pb-2">17.000.000</h4>
+        <style>
+            .btn-mh {
+                width: 200px;
+                border-radius: 5px;
+                padding: 10px;
+                box-shadow: 0 0 10px rgba(220, 20, 60, 0.1);
+            }
+
+                .btn-mh:hover {
+                    border-radius: 5px;
+                    background-color: red;
+                }
+
+            .t {
+                font-size: 40px;
+            }
+        </style>
+        <div class="mb-3 mt-3 mr-5 mb-5">
+            <button class="btn-mh">Mua hàng</button>
+            <button class="btn-mh">Thêm vào giỏ hàng</button>
+        </div>
+        <div class="bg-light p-4 " style="border-radius: 5px;border: 1px solid #e5e7eb">
+            <h3>Thông tin sản phẩm</h3>
+            <ul>
+                Máy mới 100% , chính hãng Apple Việt Nam.
+                CellphoneS hiện là đại lý bán lẻ uỷ quyền iPhone chính hãng VN/A của Apple Việt Nam
+                Hộp, Sách hướng dẫn, Cây lấy sim, Cáp Lightning - Type C
+                1 ĐỔI 1 trong 30 ngày nếu có lỗi phần cứng nhà sản xuất. Bảo hành 12 thán
+                Giá sản phẩm đã bao gồm VAT
+            </ul>
+           </div>
+            <hr />
+        </div>
+
+            @*gioithieu*@
+            <div class="container-fluid " style="background-color: red;text-align:center ;display:block"><p class="p-3">Thông tin chi tiết sản phẩm</p> </div>
+
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #f5f5f5;
+                }
+
+
+
+                .container {
+                    max-width: 1200px;
+                    margin: 20px auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+                }
+            </style>
+
+
+            <div class="container ">
+              
+            </div>
+            @*sanphamtuongtu*@
+
+            @Html.Action("laysanphamtt", "SanPhams")
+
+
