@@ -5,17 +5,139 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var db = new QL_CHDTEntities();
 }
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Lịch sử đơn hàng</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+<!--================Order Details Area =================-->
+<section class="order_details section-margin--small">
+    <div class="container">
+        @foreach (var order in Model)
+        {
+            <div class="order_details_table ">
+                <h2>Chi tiết đơn hàng #@order.SODH</h2>
 
-<style>
+                <div class="table-responsive  ">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+                            @foreach (var detail in order.CTDATHANGs)
+                            {
+                                var cus = db.SanPhams.Where(s => s.MaSP == detail.MaSP).Select(s => s.TenSP).FirstOrDefault();
+                                var cus2 = db.CTDATHANGs.Where(s => s.SODH == detail.SODH).FirstOrDefault();
+                                <tr>
+                                    <td>
+                                        <p>@cus</p>
+                                    </td>
+                                    <td>
+                                        <h5>x @cus2.Soluong</h5>
+                                    </td>
+                                    <td>
+                                        <p>@string.Format("{0:#,##0} ₫", cus2.Dongia) </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><h4>Tổng tiền</h4></th>
+                                    <th></th>
+                                    <th><h6>@order.Trigia.Value.ToString("#,##") ₫ </h6></th>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Hình thức thanh toán</h5>
+                                    </td>
+                                    <td></td>
+                                    <td >
+                                        @if (order.HTThanhtoan == true)
+                                        {
+                                            <p>Thanh toán bằng tiền mặt</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Thanh toán bằng Paypal</p>
+                                        }
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Hình thức giao hàng</h5>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        @if (order.HTGiaohang == false)
+                                        {
+                                            <p>Giao hàng trực tiếp</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Giao hàng trực tiếp</p>
+                                        }
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4>Trạng thái đơn hàng </h4>
+                                    </td>
+                                    <td>
+                                        <h5></h5>
+                                    </td>
+                                    <td>
+                                        <p>
+                                        @if (order.Dagiao == false)
+                                        {
+                                            <span>Đơn Hàng Đang Chờ Duyệt</span>
+                                            @*<button class="wait-button">Chưa xác nhận</button>*@
+                                        }
+                                        else
+                                        {
+                                            @*<button class="confirm-button">Đã xác nhận</button>*@
+                                            <span>Đơn Hàng Đang Giao Đến Bạn</span>
+                                        }
+                                        </p>
+
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        }
+    </div>
+</section>
+<!--================End Order Details Area =================-->
+
+
+
+
+@*<style>
     body {
-       
         font-family: Arial, sans-serif;
     }
 
     .container {
         max-width: 1200px;
         margin: 0 auto;
-        margin-top:20px;
+        margin-top: 20px;
     }
 
     .order-card {
@@ -54,6 +176,7 @@
         width: 170px;
         height: 44px;
     }
+
     .wait-button {
         position: absolute;
         top: 30px;
@@ -67,11 +190,12 @@
         width: 170px;
         height: 44px;
     }
+
     .paypal-button {
         position: absolute;
         top: 80px;
         right: 20px;
-        background-color:cornflowerblue;
+        background-color: cornflowerblue;
         color: #fff;
         padding: 10px 20px;
         border: none;
@@ -94,11 +218,13 @@
         width: 170px;
         height: 44px;
     }
-    .payment_tm{
-        color:blue;
+
+    .payment_tm {
+        color: blue;
     }
-    .payment_pp{
-        color:blueviolet;
+
+    .payment_pp {
+        color: blueviolet;
     }
 </style>
 
@@ -167,4 +293,4 @@
             </div>
         </div>
     }
-</div>
+</div>*@

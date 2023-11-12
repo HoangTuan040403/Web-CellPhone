@@ -83,13 +83,13 @@ namespace Doanphanmem.Controllers
             if (!String.IsNullOrEmpty(SearchString))
             {
                 sanPham = sanPham.Where(s => s.TenSP.Contains(SearchString));
-                
-               
             }
             else
             {
                 Console.WriteLine("Không tìm thấy sản phẩm nào");
             }
+
+            ViewBag.ListCategory = db.PhanLoais.ToList();
             return View(sanPham.ToList());
         }
 
@@ -275,6 +275,7 @@ namespace Doanphanmem.Controllers
                 return View("NoProductsFound");
             }
         }
+
 
         public ActionResult IndexAdmin()
         {

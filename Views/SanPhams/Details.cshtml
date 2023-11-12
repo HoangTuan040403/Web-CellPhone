@@ -3,115 +3,121 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Doanphanmem.Models.PhanLoai> phanLoais = ViewBag.ListCategory as List<Doanphanmem.Models.PhanLoai>;
+    List<Doanphanmem.Models.Mau> maus = ViewBag.ListCategory as List<Doanphanmem.Models.Mau>;
+
+
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>SanPham</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenSP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenSP)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GiaSp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GiaSp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GiaGiam)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GiaGiam)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hinh1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hinh1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hinh2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hinh2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hinh3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hinh3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hinh4)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hinh4)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mota)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mota)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Thongso)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Thongso)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mau.Tenmau)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mau.Tenmau)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhanLoai.Tenloai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhanLoai.Tenloai)
-        </dd>
-
-    </dl>
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="blog">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Chi tiết sản phẩm</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+    <div class="container">
+        <div class="row s_product_inner">
+            <div class="col-lg-6">
+                <div class="owl-carousel owl-theme s_Product_carousel">
+                    <div class="single-prd-item">
+                        <img class="img-fluid" src="@Url.Content("~/Image/" + Model.Hinh1)" alt="">
+                    </div>
+                    <!-- <div class="single-prd-item">
+                        <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+                    </div>
+                    <div class="single-prd-item">
+                        <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-lg-5 offset-lg-1">
+                <div class="s_product_text">
+                    <h3>@Model.TenSP</h3>
+                    <h2>@Model.GiaSp.Value.ToString("#,##") VND</h2>
+                    <ul class="list">
+                        <li><a class="active" href="#"><span>Thương hiệu</span> : @Model.PhanLoai.Tenloai</a></li>
+                        <li><a href="#"><span>Còn</span> : @Model.Soluongton sản phẩm</a></li>
+                    </ul>
+                    <p>
+                        @Model.Mota
+                        @*Với hệ thống cửa hàng phân bố rộng khắp, quý khách hàng có thể dễ dàng đến và trải nghiệm trực tiếp sản phẩm tại cửa hàng hoặc mua hàng online - giao hàng nhanh chóng (Giao hàng 2 giờ với đơn hàng nội thành Hồ Chí Minh).*@
+                    </p>
+                    <hr />
+                    <div class="product_count">
+                        <a class="button primary-btn" href="@Url.Action("AddProduct", "GioHang", new { MaSP = Model.MaSP })" >Mua ngay</a>
+                    </div>
+                    <div class="card_area d-flex align-items-center">
+                        @if (Session["UserID"] != null)
+                        {
+                            <a class="icon_btn" href="@Url.Action("AddToFavorite", "YeuThich", new { productId = Model.MaSP })"><i class="lnr lnr lnr-heart"></i></a>
+                        }
+                        else
+                        {
+                            <p>Hãy đăng nhập để thêm sản phẩm vào danh sách yêu thích.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<a class="btn btn-primary" href="@Url.Action("AddProduct", "GioHang", new
-{ MaSP = Model.MaSP })">
-    Đặt mua
-</a>
-
-@if (Session["UserID"] != null)
-{
-    @Html.ActionLink("Thêm vào danh sách yêu thích", "AddToFavorite", "YeuThich", new { productId = Model.MaSP }, new { @class = "btn btn-primary" })
-}
-else
-{
-    <p>Hãy đăng nhập để thêm sản phẩm vào danh sách yêu thích.</p>
-}
-
+<!--================End Single Product Area =================-->
+<!--================Product Description Area =================-->
+<section class="product_description_area">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link  active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                   aria-selected="false">Mô tả</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <h2>Tại sao nên mua hàng tại LYT</h2>
+                <hr />
+                <p style="text-align: justify;">Là một trong những hệ thống bán lẻ lớn nhất tại Việt Nam do đó có nhiều lý do để khách hàng chọn mua <strong>sản phẩm</strong> mới nhất tại hệ thống như:</p>
+                <ul padding-left: 1.5em; line-height: 2;>
+                    <li style="list-style: disc;"><p><strong>Sản phẩm chính hãng với chất lượng được đảm bảo</strong>: Là hệ thống bán lẻ ủy quyền chính hãng do đó các sản phẩm được bán tại LYT đảm bảo chính hãng với chất lượng được kiểm định.</p></li>
+                    <li style="list-style: disc;"><p><strong>Thu cũ lên đời – trợ giá cao</strong>: LYT có chương trình thiết bị cũ với định giá cao. Nhờ đó khách hàng mua sản phẩm với mức chi phí tiết kiệm nhất.</p></li>
+                    <li style="list-style: disc;"><p><strong>Trả góp 0% cùng trả trước thấp</strong>: Khi mua điện thoại qua chương trình trả góp tại LYT, khách hàng có thể mua với mức lãi suất 0% cùng với đó là chi phí trả trước cực thấp. Nhờ đó người dùng có thể dễ dàng sở hữu mẫu điện thoại cao cấp với mức trả hàng tháng phù hợp điều kiện tài chính.</p></li>
+                    <li style="list-style: disc;"><p><strong>Giảm giá sâu cho phụ kiện mua kèm chính hãng</strong>: Khi mua điện thoại kèm các phụ kiện chính hãng như bao da, ốp lưng, củ - cáp sạc thì khách hàng sẽ được mua phụ kiện chính hãng với mức giá ưu đãi.</p></li>
+                    <li style="list-style: disc;"><p><strong>Hệ thống cửa hàng toàn quốc</strong>: Với hệ thống cửa hàng phân bố rộng khắp, quý khách hàng có thể dễ dàng đến và trải nghiệm trực tiếp sản phẩm tại cửa hàng hoặc mua hàng online - giao hàng nhanh chóng (Giao hàng 2 giờ với đơn hàng nội thành Hồ Chí Minh).</p></li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h5>Dung lượng</h5>
+                                </td>
+                                <td>
+                                    <h5>@Model.Thongso</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Màu</h5>
+                                </td>
+                                <td>
+                                    <h5>@Model.Mau.Tenmau</h5>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Product Description Area =================-->

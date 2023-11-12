@@ -1,309 +1,197 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- bootstrap  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aroma Shop - Category</title>
+    <link rel="icon" href="~/Content/Home/img/Fevicon.png" type="image/png">
+    <link rel="stylesheet" href="~/Content/Home/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Home/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/Home/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/Home/vendors/linericon/style.css">
+    <link rel="stylesheet" href="~/Content/Home/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/Home/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/Home/vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="~/Content/Home/vendors/nouislider/nouislider.min.css">
 
-    <!-- font awsome -->
-    <script src="https://kit.fontawesome.com/383abdf887.js" crossorigin="anonymous"></script>
-    @* ---------------CSS--------------- *@
-<link href="~/Content/HomeStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Home/css/style.css">
 </head>
 <body>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    <!--================ Start Header Menu Area =================-->
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <a class="navbar-brand logo_h" href="~/Content/Home/index.html"><img src="~/Content/Home/img/logo.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                            <li class="nav-item"><a class="nav-link" href="/SanPhams/Index">Trang chủ</a></li>
+                            <li class="nav-item submenu dropdown">
+                                <a href="~/Content/Home/#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">Điện thoại</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/category.html">Shop Category</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/single-product.html">Product Details</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/checkout.html">Product Checkout</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/confirmation.html">Confirmation</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/cart.html">Shopping Cart</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item submenu dropdown">
+                                <a href="/SanPhams/ThongTin" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">Thông tin cửa hàng</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Chat", "Account")">Hỏi đáp</a></li>
+                        </ul>
 
-        ul {
-            list-style: none;
-        }
+                        <ul class="nav-shop menu_nav">
+                            <li class="nav-item">
+                                @using (Html.BeginForm("Index", "SanPhams", FormMethod.Get))
+                                {
+                                    <input type="text" placeholder="Bạn cần tìm gì?" name="SearchString" required>
+                                    <i class="ti-search"></i>
+                                }
+                            </li>
 
-        a {
-            text-decoration: none;
-        }
+                            @if (Session["UserID"] != null)
+                            {
+                                <li class="nav-item"><a href="/GioHang/HienThiGioHang"><i class="ti-shopping-cart"></i></a> </li>
+                                <li class="nav-item submenu dropdown">
+                                    <a href="~/Content/Home/#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">User</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="/YeuThich/YeuThichPartial">Yêu thích</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("DonHangKH", "SanPhams", new { IDCus = @HttpContext.Current.Session["UserID"].ToString() })">Lịch sử đơn hàng</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/KhachHang/Edit/@HttpContext.Current.Session["UserID"].ToString()">Thông tin cá nhân</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="~/Account/Logout">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item submenu dropdown"><a class="button button-header" href="/Account/Login">Đăng nhập</a> </li>
+                            }
 
-        header {
-            text-align: center;
-            z-index: 100;
-        }
+                        </ul>
 
-            header ul li, a {
-                color: black
-            }
-        /*-----------------nav--------------------*/
-        .container {
-            max-width: 1500px;
-            margin: auto;
-        }
-
-        nav {
-            background-color: #ff0000;
-            height: auto;
-            padding: 8px;
-            z-index: 100;
-        }
-
-            nav ul {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-                /*------------------CSS SEARCH---------------------*/
-                nav ul li, a {
-                    color: white;
-                    font-size: 17px;
-                }
-
-                    nav ul li:nth-child(2) {
-                        position: relative;
-                    }
-
-                        nav ul li:nth-child(2) input {
-                            height: 30px;
-                            width: 100%;
-                            border-radius: 5px;
-                            border: none;
-                            outline: none;
-                        }
-
-                        nav ul li:nth-child(2) i {
-                            position: absolute;
-                            font-size: 15px;
-                            right: 12px;
-                            line-height: 30px;
-                            cursor: pointer;
-                        }
-
-
-        /*----------------CSS Drop Hãng-----------------*/
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            /* padding: 12px 16px;*/
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-            .dropdown-content a:hover {
-                background-color: #ddd;
-            }
-    </style>
-
-    @*<nav class="navbar navbar-expand-lg bg-body-tertiary header">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="~/Image/LogoLYT.png" style="width:150px" /></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <li class="nav-item" style="color: #1A6DFF">
-                        <a class="nav-link active" aria-current="page" href="~/SanPhams/Index">Trang chủ</a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="nav-link" href="#">Điện thoại</a>
-                            <div class="dropdown-content">
-                                @Html.Action("layloaisp_layout", "SanPhams")
-
-                            </div>
-                        </div>
-                    </li>
-
-
-                    <li class="nav-item" ">
-                        <p class="nav-link">@Html.ActionLink("Hỏi Đáp", "Chat", "Account") </p>
-                    </li>
-                    <li class="nav-item">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="text" name="SearchString" placeholder="Search" aria-label="Nhập từ khoá ">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <p class="nav-link"> @Html.Action("GiohangPartial", "GioHang")</p>
-
-                    </li>
-                    @if (Session["UserID"] != null)
-                    {
-
-                        <li class="nav-item">
-                            <p class="nav-link"> @Html.Action("YeuThichPartial", "YeuThich")</p>
-                        </li>
-                        <li class="nav-item">
-                            <p class="nav-link" style="text-decoration:none;"> @Html.ActionLink("Đơn mua", "DonHangKH", "SanPhams", new { IDCus = @HttpContext.Current.Session["UserID"].ToString() }, null)</p>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: #1A6DFF" href="KhachHang/Edit/@HttpContext.Current.Session["UserID"].ToString()">Thông tin người dùng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: #1A6DFF" href="~/Account/Logout">Đăng Xuất</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: #1A6DFF" href="@Url.Action("Login", "Account")">Đăng nhập</a>
-                        </li>
-
-                    }
-                </ul>
-
-
-
-            </div>
-        </div>
-    </nav>*@
-
-
-    <nav>
-        <div class="container">
-            <ul>
-                @*<li><a href="/SanPhams/ProductList"><img src="~/Content/images/logostore.png" style="width:30px;height:30px" /></a></li>*@
-                <li><a href="/SanPhams/ProductList">LYT CellPhone</a></li>
-
-                <li>
-                    @using (Html.BeginForm("Productlist", "SanPhams", FormMethod.Get))
-                    {
-                        <input type="text" placeholder="Bạn cần tìm gì?" name="SearchString" required><i class="fas fa-search"></i>
-                    }
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <span><a href="#">Điện thoại</a></span>
-                        <i class="fa fa-caret-down"></i>
-                        <div class="dropdown-content">
-                            @Html.Action("layloaisp_layout", "SanPhams")
-                            @*<a href="/SanPhams/LoaiSP/1">Iphone</a>
-                    <a href="/SanPhams/LoaiSP/2">SamSung</a>
-                    <a href="/SanPhams/LoaiSP/3">Oppo</a>
-                    <a href="/SanPhams/LoaiSP/3">Xiaomi</a>
-                    <a href="/SanPhams/LoaiSP/3">Realme</a>*@
-                        </div>
                     </div>
-                </li>
-                <li><a href="/SanPhams/ThongTin">Thông tin cửa hàng</a></li>
-                <li>@Html.ActionLink("Hỏi Đáp", "Chat", "Account")</li>
-                @*<li><a href="/XemDonHang//ShowToCart"</a><i class="fas fa-shopping-cart"></i>Giỏ hàng</li>*@
-            <li class="ml-auto"> @Html.Action("GiohangPartial", "GioHang")</li>
-                @if (Session["UserID"] != null)
-                {
-
-                    <li >
-                        <p > @Html.Action("YeuThichPartial", "YeuThich")</p>
-                    </li>
-                    <li >
-                        <p style="text-decoration:none;"> @Html.ActionLink("Đơn mua", "DonHangKH", "SanPhams", new { IDCus = @HttpContext.Current.Session["UserID"].ToString() }, null)</p>
-                    </li>
-                    <li >
-                        <a  style="color: white" href="KhachHang/Edit/@HttpContext.Current.Session["UserID"].ToString()">Thông tin người dùng</a>
-                    </li>
-                    <li >
-                        <a  style="color: white" href="~/Account/Logout">Đăng Xuất</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #1A6DFF" href="@Url.Action("Login", "Account")">Đăng nhập</a>
-                    </li>
-
-                }
-            
-            </ul>
+                </div>
+            </nav>
         </div>
-    </nav>
-    <div style="margin-right:150px; margin-left:150px">
+    </header>
+    <!--================ End Header Menu Area =================-->
+
+    <div>
         @RenderBody()
     </div>
 
+    <!--================ Start footer Area  =================-->
+    <footer>
+        <div class="footer-area">
+            <div class="container">
+                <div class="row section_gap">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                            <h4 class="footer_title large_title">Our Mission</h4>
+                            <p>
+                                So seed seed green that winged cattle in. Gathering thing made fly you're no
+                                divided deep moved us lan Gathering thing us land years living.
+                            </p>
+                            <p>
+                                So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved
+                            </p>
+                        </div>
+                    </div>
+                    <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                            <h4 class="footer_title">Quick Links</h4>
+                            <ul class="list">
+                                <li><a href="~/Content/Home/#">Home</a></li>
+                                <li><a href="~/Content/Home/#">Shop</a></li>
+                                <li><a href="~/Content/Home/#">Blog</a></li>
+                                <li><a href="~/Content/Home/#">Product</a></li>
+                                <li><a href="~/Content/Home/#">Brand</a></li>
+                                <li><a href="~/Content/Home/#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="single-footer-widget instafeed">
+                            <h4 class="footer_title">Gallery</h4>
+                            <ul class="list instafeed d-flex flex-wrap">
+                                <li><img src="~/Content/Home/img/gallery/r1.jpg" alt=""></li>
+                                <li><img src="~/Content/Home/img/gallery/r2.jpg" alt=""></li>
+                                <li><img src="~/Content/Home/img/gallery/r3.jpg" alt=""></li>
+                                <li><img src="~/Content/Home/img/gallery/r5.jpg" alt=""></li>
+                                <li><img src="~/Content/Home/img/gallery/r7.jpg" alt=""></li>
+                                <li><img src="~/Content/Home/img/gallery/r8.jpg" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                            <h4 class="footer_title">Contact Us</h4>
+                            <div class="ml-40">
+                                <p class="sm-head">
+                                    <span class="fa fa-location-arrow"></span>
+                                    Head Office
+                                </p>
+                                <p>123, Main Street, Your City</p>
 
-    @* PHẦN FOOTER  *@
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 footer-item">
-                    <h4>company</h4>
-                    <ul>
-                        <li><a href="#">about us</a></li>
-                        <li><a href="#">our services</a></li>
-                        <li><a href="#">privacy policy</a></li>
-                        <li><a href="#">affiliate program</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 footer-item">
-                    <h4>get help</h4>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">shipping</a></li>
-                        <li><a href="#">returns</a></li>
-                        <li><a href="#">order status</a></li>
-                        <li><a href="#">payment options</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 footer-item">
-                    <h4>online shop</h4>
-                    <ul>
-                        <li><a href="#">watch</a></li>
-                        <li><a href="#">phone</a></li>
-                        <li><a href="#">tv</a></li>
-                        <li><a href="#">technology</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 footer-item">
-                    <h4>follow us</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <p class="sm-head">
+                                    <span class="fa fa-phone"></span>
+                                    Phone Number
+                                </p>
+                                <p>
+                                    +123 456 7890 <br>
+                                    +123 456 7890
+                                </p>
+
+                                <p class="sm-head">
+                                    <span class="fa fa-envelope"></span>
+                                    Email
+                                </p>
+                                <p>
+                                    free@infoexample.com <br>
+                                    www.infoexample.com
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="all-right-reserved">&copy;20223 LYT CellPhone | All Rights Reserved</p>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row d-flex">
+                    <p class="col-lg-12 footer-text text-center">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="~/Content/Home/https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
     </footer>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!--================ End footer Area  =================-->
+
+    <script src="~/Content/Home/vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Home/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Home/vendors/skrollr.min.js"></script>
+    <script src="~/Content/Home/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/Home/vendors/nice-select/jquery.nice-select.min.js"></script>
+    <script src="~/Content/Home/vendors/nouislider/nouislider.min.js"></script>
+    <script src="~/Content/Home/vendors/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/Home/vendors/mail-script.js"></script>
+    <script src="~/Content/Home/js/main.js"></script>
 </body>
 </html>
