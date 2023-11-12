@@ -4,37 +4,58 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
+<!-- Content Wrapper START -->
+<div class="page-header">
+    <h2 class="header-title">Quản lý sản phẩm</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/PhanLoaiAd/Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Dashboard</a>
+            <span class="breadcrumb-item active">Quản lý danh mục</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-12 text-right">
+                <a href="/PhanLoaiAd/Create" class="btn btn-primary">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Add</span>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                #@item.MaLoai
+                            </td>
+                            <td>@item.Tenloai</td>
+                            <td class="text-right">
+                                <a href="/PhanLoaiAd/Edit/@item.MaLoai" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                    <i class="anticon anticon-edit"></i>
+                                </a>
+                                <a href="/PhanLoaiAd/Delete/@item.MaLoai" class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                    <i class="anticon anticon-delete"></i>
+                                </a>
+                            </td>
+                        </tr>
 
-<h2>Index</h2>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tenloai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HinhLoai)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tenloai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HinhLoai)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaLoai }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaLoai }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaLoai })
-        </td>
-    </tr>
-}
-
-</table>
+<!-- Content Wrapper END -->
