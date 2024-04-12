@@ -1,0 +1,34 @@
+﻿@model List<Doanphanmem.Models.CTDATHANG>
+@{
+    ViewBag.Title = "DonHangChiTietKH";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center">Thông Tin Chi Tiết Đơn Hàng</h2>
+
+<table class="table">
+    <tr>
+        <th>Sản Phẩm</th>
+        <th>Số Lượng</th>
+        <th>Giá Tiền</th>
+        <th>Tổng Tiền</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SanPham.TenSP</td>
+            <td>@item.Soluong</td>
+            @*<td>@item.SanPham.GiaSp</td>*@
+            <td class="card-product__price"> @string.Format("{0:#,##0} VND", item.SanPham.GiaSp * 10)</td>
+            <td>@string.Format("{0:#,##0} VND", item.Soluong * item.SanPham.GiaSp * 10)</td>
+        </tr>
+    }
+    <tr>
+        <td>
+            Tổng số lượng sản phẩm: @Model.Sum(b => b.Soluong)
+        </td>
+        @*<td>Tổng Tiền Đơn Hàng: @Model.Sum(b => b.SanPham.GiaSp * 10)</td>*@
+        <td>Tổng Tiền Đơn Hàng: @string.Format("{0:#,##0} VND", Model.Sum(b => b.SanPham.GiaSp * 10))</td>
+    </tr>
+</table>
+

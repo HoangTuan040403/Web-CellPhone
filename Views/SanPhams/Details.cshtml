@@ -39,7 +39,8 @@
             <div class="col-lg-5 offset-lg-1">
                 <div class="s_product_text">
                     <h3>@Model.TenSP</h3>
-                    <h2>@Model.GiaSp.Value.ToString("#,##") VND</h2>
+                    @*<h2>@Model.GiaSp.Value.ToString("#,##") VND</h2>*@
+                    <p > @string.Format("{0:#,##0} VND", @Model.GiaSp * 10)</p>
                     <ul class="list">
                         <li><a class="active" href="#"><span>Thương hiệu</span> : @Model.PhanLoai.Tenloai</a></li>
                         <li><a href="#"><span>Còn</span> : @Model.Soluongton sản phẩm</a></li>
@@ -50,7 +51,7 @@
                     </p>
                     <hr />
                     <div class="product_count">
-                        <a class="button primary-btn" href="@Url.Action("AddProduct", "GioHang", new { MaSP = Model.MaSP })" >Mua ngay</a>
+                        <a class="button primary-btn" href="@Url.Action("AddProduct", "GioHang", new { MaSP = Model.MaSP })">Mua ngay</a>
                     </div>
                     <div class="card_area d-flex align-items-center">
                         @if (Session["UserID"] != null)

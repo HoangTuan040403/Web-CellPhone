@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Doanphanmem.Models.Mau>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Admin/Layout/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tenmau)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tenmau)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Mamau }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Mamau }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Mamau })
+        </td>
+    </tr>
+}
+
+</table>

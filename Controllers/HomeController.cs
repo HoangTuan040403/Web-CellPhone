@@ -26,5 +26,10 @@ namespace Doanphanmem.Controllers
 
             return View();
         }
+
+        public ActionResult ThongTin()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,30 @@
+﻿@model  IEnumerable<Doanphanmem.Models.DONDATHANG>
+@{
+    ViewBag.Title = "ThongKeDoanhThu";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@*<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <h2 class="headerTextOfQuanLy">Thống kê Doanh Thu theo ngày</h2>*@
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Tháng</th>
+            <th>Doanh thu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NgayDH</td>
+                <td>@item.Trigia</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

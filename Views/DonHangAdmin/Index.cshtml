@@ -1,106 +1,177 @@
-﻿@model IEnumerable<Doanphanmem.Models.DONDATHANG>
-
+﻿@*@model IEnumerable<Doanphanmem.Models.DONDATHANG>*@
+@using Doanphanmem.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<DONDATHANG>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center">Quản lý đơn hàng</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NgayDH)
+            @*@Html.DisplayNameFor(model => model.NgayDH)*@
+            <p>Ngày đặt hàng</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Dagiao)
+            @*@Html.DisplayNameFor(model => model.Dagiao)*@
+            <p>Hình thức thanh toán</p>
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.HTThanhtoan)
+            </th>*@
+        <th>
+            <p>Trạng thái</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HTThanhtoan)
+            <p>Giao hàng</p>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Diachinhan)*@
+            <p>Địa chỉ nhận hàng</p>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Trigia)*@
+            <p>Thành tiền</p>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Dienthoainhan)*@
+            <p>Số điện thoại </p>
         </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Diachinhan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trigia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dienthoainhan)
-        </th>
 
-   
-        <th>Tên Khách Hàng</th>
-        <th>Xác Nhận Đơn Hàng</th>
+        <th><p>Tên Khách Hàng</p></th>
+        @*<th>Xác Nhận Đơn Hàng</th>*@
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayDH)
-        </td>
-        <td>
-            @{ if (@item.Dagiao == true)
-                {
-                    <h5 style="color:green">Đã xác nhận  </h5>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDH)
+            </td>
+
+            <td>
+                @{ if (@item.HTThanhtoan == false)
+                    {
+                        @*@item.Dagiao= true;*@
+                        item.Dagiao = true;
+                        <div style="color:red">Thanh toán chuyển khoản</div> }
+                    else if (@item.HTThanhtoan == true)
+                    {
+                        <div style="color:brown">Thanh toán tiền mặt</div> }
 
 
                 }
-                else if (@item.Dagiao == false)
-                {
-                    <h5 style="color:red">Đang chờ xác nhận. </h5>
-                }
-            }
-        </td>
-        <td>
-            @{ if (@item.HTThanhtoan == false)
-                {
-                    <div style="color:red">Thanh toán chuyển khoản</div> }
-                else if (@item.HTThanhtoan == true)
-                {
-                    <div style="color:brown">Thanh toán tiền mặt</div> }
-                }
-        </td>
+            </td>
+            @*<td>
+                    @{ if (@item.Dagiao == true)
+                        {
+                            <h5 style="color:green">Đã xác nhận  </h5>
 
- 
-        <td>
-            @Html.DisplayFor(modelItem => item.Diachinhan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trigia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dienthoainhan)
-        </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
-        </td>
-        <td>
+                        }
+                        else if (@item.Dagiao == false)
+                        {
+                            <h5 style="color:red">Đang chờ xác nhận. </h5>
+                        }
+                    }
+                </td>*@
+            <td>
+                @if (item.HuyDon == true)
+                {
+                    <span style="color:red">Đơn hàng đã hủy</span>
+                }
+                else
+                {
 
-            @{ if (@item.Dagiao == true)
-                {
-                    <p>
-                        <button> @Html.ActionLink("Hủy Đơn Hàng", "Xacnhan", new { id = item.SODH }) </button>
-                    </p>
+                    {
+                        if (@item.Dagiao == true)
+                        {
+                            @*<p>
+                                    <button> @Html.ActionLink("Hủy Đơn Hàng", "Xacnhan", new { id = item.SODH }) </button>
+                                </p>*@
+                            <h5 style="color:green">Đã xác nhận  </h5>
+                        }
+                        else if (@item.Dagiao == false)
+                        {
+                            <p>
+                                <button class="btn btn-close-white" style="color:white"> @Html.ActionLink("Xác nhận đơn hàng", "Xacnhan", new { id = item.SODH }) </button>
+                            </p>
+                        }
+                    }
+
                 }
-                else if (@item.Dagiao == false)
+            </td>
+
+            <td>
+                @if (item.HuyDon == true)
                 {
-                    <p>
-                        <button> @Html.ActionLink("Xác nhận đơn hàng", "Xacnhan", new { id = item.SODH }) </button>
-                    </p>
+                    <span style="color:red">Đơn hàng đã hủy</span>
                 }
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.SODH }) |
-            @Html.ActionLink("DonHangChiTiet", "DonHangChiTiet", new { id = item.SODH }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.SODH })
-        </td>
-    </tr>
-}
+                else
+                {
+                    if (@item.GiaoHang == true)
+                    {
+                        @*<p>
+                    <button> @Html.ActionLink("Hủy Đơn Hàng", "Xacnhan", new { id = item.SODH }) </button>
+                </p>*@
+                        <h5 style="color:green">Đã giao hàng  </h5>
+                    }
+                    else if (@item.GiaoHang == false)
+                    {
+                        <h5 style="color:orangered">Đang giao hàng </h5>
+                    }
+                }
+
+
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Diachinhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trigia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dienthoainhan)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+            </td>
+
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.SODH }) |*@
+                @Html.ActionLink("Chi Tiết", "DonHangChiTiet", new { id = item.SODH }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SODH })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+<br />
+<div style="text-align:center">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang" style="margin-left:520px">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+
+    td, th {
+        text-align: center;
+    }
+</style>

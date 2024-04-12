@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Doanphanmem.Models;
+using Doanphanmem.Pattern;
 
 namespace Doanphanmem.Controllers
 {
@@ -15,9 +16,13 @@ namespace Doanphanmem.Controllers
         private QL_CHDTEntities db = new QL_CHDTEntities();
 
         // GET: Categories
+
+        //SingleTon------
         public ActionResult Index()
-        {
-            return View(db.PhanLoais.ToList());
+        {         
+            var dbContextManager = Category_pattern.GetInstance();
+            IEnumerable<PhanLoai> phanLoais = dbContextManager.GetAllPhanLoais();          
+            return View(phanLoais);
         }
 
         // GET: Categories/Details/5

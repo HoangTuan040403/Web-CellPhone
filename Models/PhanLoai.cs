@@ -20,8 +20,8 @@ namespace Doanphanmem.Models
             this.SanPhams = new HashSet<SanPham>();
         }
     
-        public string Tenloai { get; set; }
         public int MaLoai { get; set; }
+        public string Tenloai { get; set; }
         public string HinhLoai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

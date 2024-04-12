@@ -31,6 +31,8 @@ namespace Doanphanmem.Models
         public string Dienthoainhan { get; set; }
         public Nullable<bool> HTThanhtoan { get; set; }
         public Nullable<bool> HTGiaohang { get; set; }
+        public Nullable<bool> GiaoHang { get; set; }
+        public Nullable<bool> HuyDon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTDATHANG> CTDATHANGs { get; set; }

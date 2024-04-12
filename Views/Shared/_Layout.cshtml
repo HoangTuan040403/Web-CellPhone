@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aroma Shop - Category</title>
-    <link rel="icon" href="~/Content/Home/img/Fevicon.png" type="image/png">
+    <title>LYT Shop</title>
+    <link rel="icon" href="~/Image/LogoLYT.png" type="image/png">
     <link rel="stylesheet" href="~/Content/Home/vendors/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/Home/vendors/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/Content/Home/vendors/themify-icons/themify-icons.css">
@@ -23,65 +23,82 @@
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
-                    <a class="navbar-brand logo_h" href="~/Content/Home/index.html"><img src="~/Content/Home/img/logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="~/SanPhams/Index"><img src="~/Image/LogoLYT.png" style="height:70px" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-                            <li class="nav-item"><a class="nav-link" href="/SanPhams/Index">Trang chủ</a></li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="~/Content/Home/#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                   aria-expanded="false">Điện thoại</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/category.html">Shop Category</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/single-product.html">Product Details</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/checkout.html">Product Checkout</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/confirmation.html">Confirmation</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="~/Content/Home/cart.html">Shopping Cart</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="/SanPhams/ThongTin" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                   aria-expanded="false">Thông tin cửa hàng</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Chat", "Account")">Hỏi đáp</a></li>
-                        </ul>
-
-                        <ul class="nav-shop menu_nav">
-                            <li class="nav-item">
-                                @using (Html.BeginForm("Index", "SanPhams", FormMethod.Get))
-                                {
-                                    <input type="text" placeholder="Bạn cần tìm gì?" name="SearchString" required>
-                                    <i class="ti-search"></i>
-                                }
-                            </li>
-
-                            @if (Session["UserID"] != null)
-                            {
-                                <li class="nav-item"><a href="/GioHang/HienThiGioHang"><i class="ti-shopping-cart"></i></a> </li>
+                    @if (Session["UserID"] != null)
+                    {
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                                <li class="nav-item"><a class="nav-link" href="~/SanPhams/Index">Trang chủ</a></li>
                                 <li class="nav-item submenu dropdown">
                                     <a href="~/Content/Home/#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                       aria-expanded="false">User</a>
+                                       aria-expanded="false">Điện thoại</a>
                                     <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="nav-link" href="/YeuThich/YeuThichPartial">Yêu thích</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("DonHangKH", "SanPhams", new { IDCus = @HttpContext.Current.Session["UserID"].ToString() })">Lịch sử đơn hàng</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/KhachHang/Edit/@HttpContext.Current.Session["UserID"].ToString()">Thông tin cá nhân</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="~/Account/Logout">Đăng xuất</a></li>
+                                        @Html.Action("layloaisp_layout", "SanPhams")
                                     </ul>
                                 </li>
-                            }
-                            else
-                            {
+                                <li class="nav-item"><a class="nav-link" href="/Home/ThongTin">Thông tin cửa hàng</a></li>
+                                
+                            </ul>
+                            <ul class="nav-shop">
+                                <li class="nav-item">
+                                    @using (Html.BeginForm("Index", "SanPhams", FormMethod.Get))
+                                    {
+                                        <input type="text" placeholder="Bạn cần tìm gì?" name="SearchString" required>
+                                        <i class="ti-search"></i>
+                                    }
+                                </li>
+                                <li class="nav-item"> @Html.Action("GiohangPartial", "GioHang")</li>
+                                <li class="nav-item"><a class="button button-header">@Session["UserName"]</a></li>
+
+                            </ul>
+                            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false"><i class="ti-menu"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="/YeuThich/FavoriteList">Yêu thích</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("DonHangKH", "SanPhams", new { IDCus = @HttpContext.Current.Session["UserID"].ToString() })">Đơn hàng</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="@Url.Action("Edit", "KhachHang", new { id = Session["UserID"]  })">Thông tin</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/Account/Logout">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                                <li class="nav-item"><a class="nav-link" href="~/SanPhams/Index">Trang chủ</a></li>
+                                <li class="nav-item submenu dropdown">
+                                    <a href="~/Content/Home/#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">Điện thoại</a>
+                                    <ul class="dropdown-menu">
+                                        @Html.Action("layloaisp_layout", "SanPhams")
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="/Home/ThongTin">Thông tin cửa hàng</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Account/ChatOnline">Hỏi đáp</a></li>
+                            </ul>
+                            <ul class="nav-shop">
+                                <li class="nav-item">
+                                    @using (Html.BeginForm("Index", "SanPhams", FormMethod.Get))
+                                    {
+                                        <input type="text" placeholder="Bạn cần tìm gì?" name="SearchString" required>
+                                        <i class="ti-search"></i>
+                                    }
+                                </li>
+                                <li class="nav-item"> @Html.Action("GiohangPartial", "GioHang")</li>
                                 <li class="nav-item submenu dropdown"><a class="button button-header" href="/Account/Login">Đăng nhập</a> </li>
-                            }
-
-                        </ul>
-
-                    </div>
+                            </ul>
+                        </div>
+                    }
                 </div>
             </nav>
         </div>
@@ -126,12 +143,13 @@
                         <div class="single-footer-widget instafeed">
                             <h4 class="footer_title">Gallery</h4>
                             <ul class="list instafeed d-flex flex-wrap">
-                                <li><img src="~/Content/Home/img/gallery/r1.jpg" alt=""></li>
-                                <li><img src="~/Content/Home/img/gallery/r2.jpg" alt=""></li>
-                                <li><img src="~/Content/Home/img/gallery/r3.jpg" alt=""></li>
-                                <li><img src="~/Content/Home/img/gallery/r5.jpg" alt=""></li>
-                                <li><img src="~/Content/Home/img/gallery/r7.jpg" alt=""></li>
-                                <li><img src="~/Content/Home/img/gallery/r8.jpg" alt=""></li>
+                                <li><img style="height:65px; width:65px" src="~/Image/Gallery/applelogo.png" /></li>
+                                <li><img style="height:65px; width:65px" src="~/Image/Gallery/samsung-logo.png" /></li>
+                                <li><img style="height:65px; width:65px" src="~/Image/Gallery/oppologo.png" /></li>
+                                <li><img style="height:65px; width:65px" src="~/Image/Gallery/gglogo.png" /></li>
+                                <li><img style="height:65px; width:65px" src="~/Image/Gallery/logo-Huawei.png" /></li>
+                                <li><img style="height:65px; width:65px" src="~/Image/Gallery/xiaomilogo.png" /></li>
+
                             </ul>
                         </div>
                     </div>

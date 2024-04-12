@@ -1,0 +1,36 @@
+﻿@model List<Doanphanmem.Models.DONDATHANG>
+@using Doanphanmem.Models
+
+    @{
+        ViewBag.Title = "XacNhanHuyDon";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        var db = new QL_CHDTEntities();
+    }
+
+    <div class="modal" style="position: relative;display: block;z-index: 0;overflow-y: hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa đơn hàng?</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="anticon anticon-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc xóa đơn hàng?</p>
+                </div>
+                @foreach (var order in Model)
+                {
+
+                    <div class="modal-footer">
+                        <a href="/SanPhams/DonHangKH" type="button" class="btn btn-default m-r-10" data-dismiss="modal">Close</a>
+                        @*<input type="submit" value="Delete" class="btn btn-primary" />*@
+
+                        <button class="btn-close" style="border-radius:5px"> @Html.ActionLink("Hủy Đơn", "HuyDon", new { id = order.SODH })</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+

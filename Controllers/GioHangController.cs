@@ -184,6 +184,8 @@ namespace Doanphanmem.Controllers
                 donhang.Dienthoainhan = kh.sdt.ToString();
                 donhang.HTThanhtoan = true;
                 donhang.HTGiaohang = false;
+                donhang.GiaoHang = false;
+                donhang.HuyDon = false;
                 db.DONDATHANGs.Add(donhang);
                 db.SaveChanges();
                 // thêm vào chi tiết đơn hàng
@@ -195,18 +197,18 @@ namespace Doanphanmem.Controllers
                         ct.MaSP = sanpham.MaDT;
                         ct.Soluong = sanpham.Soluong;
                         ct.Dongia = (decimal)TinhTongTien();
-                    }                 
-                    db.CTDATHANGs.Add(ct);                   
-                    Session["GioHang"] = null;
-                    foreach (var p in db.SanPhams.Where(s => s.MaSP == ct.MaSP)) // lấy ID Product có trong giỏ hàng
-                    {
-                        var update_quan_pro = p.Soluongton - ct.Soluong; //Số lượng tồn mới  = số lượng tồn - số lượng đã mua 
-                        if (p.Soluongton > 0)
-                        {
-                            p.Soluongton = (int)update_quan_pro; //Thực hiện cập nhật lại số lượng tồn cho cột Quantity của bảng Product
-
-                        }
                     }
+                    db.CTDATHANGs.Add(ct);
+                    //Session["GioHang"] = null;
+                    //foreach (var p in db.SanPhams.Where(s => s.MaSP == ct.MaSP)) // lấy ID Product có trong giỏ hàng
+                    //{
+                    //    var update_quan_pro = p.Soluongton - ct.Soluong; //Số lượng tồn mới  = số lượng tồn - số lượng đã mua 
+                    //    if (p.Soluongton > 0)
+                    //    {
+                    //        p.Soluongton = (int)update_quan_pro; //Thực hiện cập nhật lại số lượng tồn cho cột Quantity của bảng Product
+
+                    //    }
+                    //}
                 }
                 db.SaveChanges();
                 //xóa giỏ hàng
@@ -291,6 +293,8 @@ namespace Doanphanmem.Controllers
             donhang.Dienthoainhan = kh.sdt.ToString();
             donhang.HTThanhtoan = false;
             donhang.HTGiaohang = false;
+            donhang.GiaoHang = false;
+           
             db.DONDATHANGs.Add(donhang);
             db.SaveChanges();
             // thêm vào chi tiết đơn hàng

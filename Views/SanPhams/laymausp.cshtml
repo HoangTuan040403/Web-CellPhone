@@ -1,0 +1,11 @@
+﻿@using Doanphanmem.Models
+@model IEnumerable<Mau>
+
+@foreach (var mau in Model)
+{
+    <li class="filter-list">
+        <input class="pixel-radio" type="radio" id="men" name="brand">
+        <a style="color: #777" href="~/SanPhams/MauSp/@mau.Mamau" for="men">@mau.Tenmau</a>
+        
+    </li>
+}

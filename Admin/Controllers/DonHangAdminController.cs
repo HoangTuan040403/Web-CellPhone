@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Doanphanmem.Models;
+using PagedList;
 
 namespace Doanphanmem.Admin.Controllers
 {
@@ -15,10 +17,18 @@ namespace Doanphanmem.Admin.Controllers
         private QL_CHDTEntities db = new QL_CHDTEntities();
 
         // GET: DonHangAdmin
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var dONDATHANGs = db.DONDATHANGs.Include(d => d.KhachHang);
-            return View(dONDATHANGs.ToList());
+            //return View(dONDATHANGs.ToList());
+            var dsSach = dONDATHANGs.ToList();
+            //Tạo biến cho biết số sách mỗi trang
+            int pageSize = 7;
+            //Tạo biến số trang
+            int pageNum = (page ?? 1);
+            return View(dsSach.OrderBy(donhang => donhang.SODH).ToPagedList(pageNum, pageSize));
+            //var dONDATHANGs = db.DONDATHANGs.Include(d => d.KhachHang);
+            //return View(dONDATHANGs.ToList());
         }
 
         public ActionResult Xacnhan(int? id)
@@ -44,6 +54,8 @@ namespace Doanphanmem.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+
+       
         // GET: DonHangAdmin/Details/5
         public ActionResult Details(int? id)
         {
@@ -76,6 +88,8 @@ namespace Doanphanmem.Admin.Controllers
             var cTDATHANGs = db.CTDATHANGs.Include(c => c.DONDATHANG).Include(c => c.SanPham).Where(c => c.SODH == id);
             return View(cTDATHANGs.ToList());
         }
+
+    
 
         // GET: DonHangAdmin/Create
         public ActionResult Create()
@@ -159,6 +173,23 @@ namespace Doanphanmem.Admin.Controllers
             db.DONDATHANGs.Remove(dONDATHANG);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ThongKeDoanhThu()
+        {
+            var dailyTotal = db.DONDATHANGs.GroupBy(t => DbFunctions.TruncateTime(t.NgayDH)).Select(g => new /*DonHang*/ { NgayDH = g.Key, TongTien = g.Sum(t => t.Trigia) }).ToList();
+            var dailyRevenueList = dailyTotal.Select(d => new DONDATHANG { NgayDH = d.NgayDH, Trigia = d.TongTien }).ToList();
+            return View(dailyRevenueList);
+
+            //var monthlyTotal = db.DONDATHANGs
+            //.Where(t => t.NgayDH != null && t.NgayDH is DateTime)
+            //.GroupBy(t => new {  t.NgayDH.Value.Year,  t.NgayDH.Value.Month })
+            //.Select(g => new { Thang = g.Key.Month, Nam = g.Key.Year, TongTien = g.Sum(t => t.Trigia) })
+            //.ToList();
+
+            //var monthlyRevenueList = monthlyTotal.Select(d => new DONDATHANG { NgayDH = new DateTime(d.Nam, d.Thang, 1), Trigia = d.TongTien }).ToList();
+
+            //return View(monthlyRevenueList);
         }
 
         protected override void Dispose(bool disposing)

@@ -2,104 +2,131 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Admin/Layout/_LayoutPage1.cshtml";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Delete</h2>
+@*<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>DONDATHANG</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayDH)
-        </dt>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>DONDATHANG</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayDH)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayDH)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NgayDH)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Dagiao)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Dagiao)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dagiao)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Dagiao)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ngaygiaohang)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ngaygiaohang)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ngaygiaohang)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Ngaygiaohang)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Tennguoinhan)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Tennguoinhan)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tennguoinhan)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Tennguoinhan)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Diachinhan)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diachinhan)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Diachinhan)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Diachinhan)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Trigia)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Trigia)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Trigia)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Trigia)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Dienthoainhan)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Dienthoainhan)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dienthoainhan)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Dienthoainhan)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HTThanhtoan)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.HTThanhtoan)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HTThanhtoan)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.HTThanhtoan)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HTGiaohang)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.HTGiaohang)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HTGiaohang)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.HTGiaohang)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.KhachHang.TenKH)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.KhachHang.TenKH)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.KhachHang.TenKH)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>*@
+
+
+<div class="modal" style="position: relative;display: block;z-index: 0;overflow-y: hidden;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa sản phẩm?</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc xóa sản phẩm @Model.SODH ?</p>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-footer">
+                    <a href="/SanPhams/IndexAdmin" type="button" class="btn btn-default m-r-10" data-dismiss="modal">Close</a>
+                    <input type="submit" value="Delete" class="btn btn-primary" />
+                </div>
+            }
+
         </div>
-    }
+    </div>
 </div>
+

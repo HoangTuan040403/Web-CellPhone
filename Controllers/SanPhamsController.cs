@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Razor.Tokenizer.Symbols;
+using System.Web.UI;
 using Doanphanmem.Models;
+using PagedList;
 
 namespace Doanphanmem.Controllers
 {
@@ -16,7 +20,7 @@ namespace Doanphanmem.Controllers
         private QL_CHDTEntities db = new QL_CHDTEntities();
 
         // danh sách đơn hàng của khách hàng
-        public ActionResult DonHangKH(int IDCus)
+        public ActionResult DonHangKH(int? IDCus)
         {
             // Truy vấn dữ liệu từ cơ sở dữ liệu dựa trên IDCus
             IDCus = (int)Session["UserID"];
@@ -26,7 +30,47 @@ namespace Doanphanmem.Controllers
                 .ToList();
             return View(orders);
         }
- 
+        public ActionResult HoanThanhDH(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DONDATHANG donhang = db.DONDATHANGs.Find(id);
+            //donhang.Dagiao = true;
+
+            if (donhang.GiaoHang == false)
+            {
+                donhang.GiaoHang = true;
+            }
+            db.SaveChanges();
+            if (donhang == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("DonHangKH");
+        }
+
+        public ActionResult HuyDon(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DONDATHANG donhang = db.DONDATHANGs.Find(id);
+            //donhang.Dagiao = true;
+
+            if (donhang.HuyDon == false)
+            {
+                donhang.HuyDon = true;
+            }
+            db.SaveChanges();
+            if (donhang == null)
+            {
+                return HttpNotFound();
+            }
+            return RedirectToAction("DonHangKH");
+        }
 
 
         public ActionResult getCus(int ID)
@@ -77,19 +121,39 @@ namespace Doanphanmem.Controllers
 
 
         // GET: SanPhams
-        public ActionResult Index(String SearchString)
+        public ActionResult Index(String SearchString, string sortOrder)
         {
-            var sanPham = db.SanPhams.Include(s => s.Mau).Include(s => s.PhanLoai);
+            ViewBag.MaSpSortParm = String.IsNullOrEmpty(sortOrder) ? "masp_desc" : "";
+            ViewBag.TenSpSortParm = sortOrder == "tensp" ? "tensp_desc" : "tensp";           
+            //var sanPham = db.SanPhams.Include(s => s.Mau).Include(s => s.PhanLoai);         
+            //Tạo Products và có tham chiếu đến Loại sản phẩm:
+            var sanPham = db.SanPhams.Include(p => p.PhanLoai);
             if (!String.IsNullOrEmpty(SearchString))
             {
                 sanPham = sanPham.Where(s => s.TenSP.Contains(SearchString));
             }
+
             else
             {
                 Console.WriteLine("Không tìm thấy sản phẩm nào");
             }
+            switch (sortOrder)
+            {
+                case "masp_desc":
+                    sanPham = sanPham.OrderByDescending(s => s.MaSP);
+                    break;
+                case "tensp":
+                    sanPham = sanPham.OrderBy(s => s.TenSP);
+                    break;
+                case "tensp_desc":
+                    sanPham = sanPham.OrderByDescending(s => s.TenSP);
+                    break;
+                default:
+                    sanPham = sanPham.OrderBy(s => s.MaSP);
+                    break;
+            }
 
-            ViewBag.ListCategory = db.PhanLoais.ToList();
+            //ViewBag.ListCategory = db.PhanLoais.ToList();
             return View(sanPham.ToList());
         }
 
@@ -223,6 +287,7 @@ namespace Doanphanmem.Controllers
             db.SaveChanges();
             return RedirectToAction("IndexAdmin");
         }
+        
 
         protected override void Dispose(bool disposing)
         {
@@ -241,6 +306,10 @@ namespace Doanphanmem.Controllers
         //}
 
         // top 5 sản phẩm bán chạy nhất 
+        public ActionResult XacNhanHuyDon()
+        {
+            return View();
+        }
         public ActionResult laysanphamtt()
         {
             var sanpham = db.SanPhams
@@ -248,6 +317,18 @@ namespace Doanphanmem.Controllers
                 .Take(5) // Lấy 5 sản phẩm có số lượng tồn thấp nhất
                 .ToList();
             return PartialView(sanpham);
+        }
+        public ActionResult MauSp(int id)
+        {
+            var s = db.SanPhams.Where(sanpham => sanpham.Mamau == id).ToList();
+            return View("Index", s);
+        }
+
+
+        public ActionResult laymausp()
+        {
+            var mau = db.Maus.ToList();
+            return PartialView(mau);
         }
 
         public ActionResult layloaisp()
@@ -257,15 +338,27 @@ namespace Doanphanmem.Controllers
         }
 
         //
+        public ActionResult LoaiSP(int id)
+        {
+            var s = db.SanPhams.Where(sanpham => sanpham.MaLoai == id).ToList();
+            return View("Index", s);
+        }
+
         public ActionResult layloaisp_layout()
         {
             var loaisp = db.PhanLoais.ToList();
             return PartialView(loaisp);
         }
-        public ActionResult locgia(int gia)
+        public ActionResult locgia(int gia, int SortPrice = 0)
         {
-            var sp = db.SanPhams.Where(s => s.GiaSp > 0 && s.GiaSp <= gia).ToList();
+            List<SanPham> lsproducts = new List<SanPham>();
+            var sp = db.SanPhams.Where(s => s.GiaSp > 0).ToList();
 
+            if(SortPrice == 1)
+            {
+                 sp = db.SanPhams.Where(s => s.GiaSp > 0 && s.GiaSp <= 500000).ToList();
+            }
+            ViewBag.SortPrice = SortPrice;
             if (sp != null)
             {
                 return View(sp);
@@ -274,13 +367,26 @@ namespace Doanphanmem.Controllers
             {
                 return View("NoProductsFound");
             }
+
         }
 
 
-        public ActionResult IndexAdmin()
+        public ActionResult IndexAdmin(String SearchString, int? page)
         {
-            var sp = db.SanPhams.Include(s => s.PhanLoai);
-            return View(sp.ToList());
+            var sanPham = db.SanPhams.Include(s => s.Mau).Include(s => s.PhanLoai);
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                sanPham = sanPham.Where(s => s.TenSP.Contains(SearchString));
+            }
+            {
+                Console.WriteLine("Không tìm thấy sản phẩm nào");
+            }
+            var dsSach = sanPham.ToList();
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            return View(dsSach.OrderBy(donhang => donhang.MaSP).ToPagedList(pageNum, pageSize));
+            //var sp = db.SanPhams.Include(s => s.PhanLoai);
+            //return View(sp.ToList());
         }
        
         public ActionResult TrangChuAdmin()
@@ -288,6 +394,14 @@ namespace Doanphanmem.Controllers
             return View();
         }
 
+
+        public ActionResult DonHangChiTietKH(int? id)
+        {
+            // Thực hiện truy vấn cơ sở dữ liệu để lấy danh sách chi tiết đơn hàng dựa vào SODH
+
+            var cTDATHANGs = db.CTDATHANGs.Include(c => c.DONDATHANG).Include(c => c.SanPham).Where(c => c.SODH == id);
+            return View(cTDATHANGs.ToList());
+        }
     }
 
 }

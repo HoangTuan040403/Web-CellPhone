@@ -27,10 +27,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Giá tiền</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Tổng tiền</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -52,7 +52,8 @@
                                     </td>
                                     <td>
                                         <h5>
-                                            @gia.ToString("#,##0").Replace(',', '.')&#8363
+                                            @*@gia.ToString("#,##0").Replace(',', '.')&#8363*@
+                                            @string.Format("{0:#,##0} VND", item.Dongia * 10)
                                         </h5>
                                     </td>
                                     <td>
@@ -64,7 +65,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <h5>@total.ToString("#,##0").Replace(',', '.')&#8363</h5>
+                                        @*<h5>@total.ToString("#,##0").Replace(',', '.')&#8363</h5>*@
+                                        @string.Format("{0:#,##0} VND", total * 10)
                                     </td>
                                     <td>
                                         <a href=" @Url.Action("DeleteProduct", "GioHang", new { MaSP = item.MaDT })"><i style="color:black" class="ti-close"></i></a>
@@ -79,7 +81,8 @@
                                     <h5>Tổng tiền</h5>
                                 </td>
                                 <td>
-                                    <h5>@ViewBag.TongTien.ToString("#,##0").Replace(',', '.') &#8363</h5>
+                                    @*<h5>@ViewBag.TongTien.ToString("#,##0").Replace(',', '.') &#8363</h5>*@
+                                    <p class="card-product__price"> @string.Format("{0:#,##0} VND", ViewBag.TongTien * 10)</p>
                                 </td>
 
                             </tr>
@@ -101,7 +104,8 @@
                                         }
                                         else if (Session["taikhoan"] == null)
                                         {
-                                            @Html.ActionLink("Đặt hàng", "DatHang2", null, new { @class = "primary-btn ml-2" })
+                                            @*@Html.ActionLink("Đặt hàng", "Login", null, new { @class = "primary-btn ml-2" })*@
+                                            <a href="/Account/Login"><button class="primary-btn ml-2">Đặt hàng</button></a>
                                         }
                                     </div>
                                 </td>

@@ -96,35 +96,30 @@
                 <div class="sidebar-filter">
                     <div class="top-filter-head">Filter</div>
                     <div class="common-filter">
-                        <div class="head">Tầm giá</div>
+                        <div class="head">Sắp xếp</div>
                         <form action="#">
                             <ul>
                                 <li class="filter-list">
                                     <input class="pixel-radio" type="radio" id="apple" name="brand">
-                                    <a style="color: #777" href="@Url.Action("locgia", "SanPhams", new { gia = 2000000 } )">Dưới 2 triệu</a>
+                                    @*<a style="color: #777" href="@Url.Action("locgia", "SanPhams", new { gia = 500000 } )">Dưới 5 triệu</a>*@
+                                    @*<a href="/SanPhams/locgia?SortPrice=1">Dưới 5 triệu</a>*@
+                                    @Html.ActionLink("A > Z", "Index", new { sortOrder = ViewBag.TenSpSortParm })
                                 </li>
                             </ul>
                         </form>
                     </div>
                     <div class="common-filter">
-                        <div class="head">Dung lượng</div>
+                        <div class="head">Màu</div>
                         <form action="#">
                             <ul>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
+
                                 <li class="filter-list">
-                                    <input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">
-                                        Black
-                                        Leather<span>(29)</span>
-                                    </label>
+                                    @*<input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">*@
+                                    @Html.Action("laymausp", "SanPhams")
+
                                 </li>
-                                <li class="filter-list">
-                                    <input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">
-                                        Black
-                                        with red<span>(19)</span>
-                                    </label>
-                                </li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
-                                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
+
+
                             </ul>
                         </form>
                     </div>
@@ -141,8 +136,9 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="card text-center card-product">
                                     <div class="card-product__img">
-                                        <img class="card-img" src="~/Image/@item.Hinh1" alt="">
-
+                                        <a href="/SanPhams/Details/@item.MaSP">
+                                            <img style="height:250px; width:250px" class="card-img" src="~/Image/@item.Hinh1" alt="">
+                                        </a>
                                         <ul class="card-product__imgOverlay">
                                             <li>
                                                 <a href="@Url.Action("AddProduct","GioHang", new {MaSP=item.MaSP})"><i class="ti-shopping-cart"></i></a>
@@ -152,7 +148,8 @@
                                     <div class="card-body">
                                         <p>@item.PhanLoai.Tenloai</p>
                                         <h4 class="card-product__title"><a href="/SanPhams/Details/@item.MaSP">@item.TenSP</a></h4>
-                                        <p class="card-product__price"> @string.Format("{0:#,##0} VND", item.GiaSp)</p>
+                                        <p class="quantity">Số lượng tồn kho: @Html.DisplayFor(model => item.Soluongton)</p>
+                                        <p class="card-product__price"> @string.Format("{0:#,##0} VND", item.GiaSp * 10)</p>
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +163,7 @@
         </div>
     </div>
 </section>
+
 <!-- ================ category section end ================= -->
 <!-- ================ Blog section start ================= -->
 <section class="blog">

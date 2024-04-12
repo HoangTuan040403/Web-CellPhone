@@ -1,9 +1,108 @@
 ﻿@model Doanphanmem.Models.KhachHang
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
+    //ViewBag.Title = "Edit";
+    Layout = null;
 }
+
+
+@*<div class="container">
+        <table>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4 class="text-info" style="text-align:center; padding-top:7px">Thông tin tài khoản</h4>
+                    <hr class="bg-info" />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.MaKH)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TenKH, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8" >
+                            @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.sdt, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NgaySinh, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TK, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TK, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TK, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Pass, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Pass, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Roleuser, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Roleuser, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Roleuser, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Hinh, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Hinh, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </table>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
 
 @if (Session["UserID"] == null)
 {
@@ -19,7 +118,7 @@ else
         <meta name="viewport" content="width=device-width" />
         <title>Thông Tin Người Dùng</title>
         <style>
-            body {  
+            body {
                 background-color: #f5f5f5;
             }
 
@@ -47,7 +146,7 @@ else
                 border-radius: 50%;
                 border: 5px solid #5a5a5b;
                 margin: 0 auto 20px;
-                margin-left:150px;
+                margin-left: 150px;
             }
 
             .card__name {
@@ -56,20 +155,20 @@ else
                 font-weight: bold;
                 color: black;
                 margin: 0;
-                margin-bottom:20px;
+                margin-bottom: 20px;
             }
 
             .form-group {
                 margin-bottom: 20px;
             }
 
-            label{
-                margin-left:55px;
+            label {
+                margin-left: 55px;
             }
+
             .name-p {
-               float:right;
-               margin-right:50px;
-    
+                float: right;
+                margin-right: 50px;
             }
 
             .btn {
@@ -87,7 +186,6 @@ else
                 .btn:focus {
                     outline: 2px dotted #00f7ff;
                 }
-
         </style>
     </head>
     <body>
@@ -98,55 +196,93 @@ else
                 @Html.HiddenFor(model => model.MaKH)
                 @Html.HiddenFor(model => model.TK, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.HiddenFor(model => model.Pass, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.HiddenFor(model => model.Roleuser, new { htmlAttributes = new { @class = "form-control" } })
+                // @Html.HiddenFor(model => model.Roleuser, new { htmlAttributes = new { @class = "form-control" } })
 
-            <div class="card">
-                <img src="https://lh3.googleusercontent.com/ytP9VP86DItizVX2YNA-xTYzV09IS7rh4WexVp7eilIcfHmm74B7odbcwD5DTXmL0PF42i2wnRKSFPBHlmSjCblWHDCD2oD1oaM1CGFcSd48VBKJfsCi4bS170PKxGwji8CPmehwPw=w200-h247-no" alt="Person" class="card__image">
-                <p class="card__name">Thông tin chi tiết người dùng</p>
-                <div class="form-group">
-                    <label for="TenKH">Tên người dùng:</label>
-                    <div class="name-p">
-                        @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+                <div class="card">
+                    @*<img src="https://lh3.googleusercontent.com/ytP9VP86DItizVX2YNA-xTYzV09IS7rh4WexVp7eilIcfHmm74B7odbcwD5DTXmL0PF42i2wnRKSFPBHlmSjCblWHDCD2oD1oaM1CGFcSd48VBKJfsCi4bS170PKxGwji8CPmehwPw=w200-h247-no" alt="Person" class="card__image">*@
+                    <div class="circle-image" style="text-align:center">
+                        @*<img src="~/Image/Loai/@Html.DisplayNameFor(model => model.Hinh)" />*@
+                        @*@Html.DisplayNameFor(model => model.Hinh)*@
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="sdt">Số điện thoại:</label>
-                    <div class="name-p">
-                        @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+                    <p class="card__name">Thông tin chi tiết người dùng</p>
+                    <div class="form-group">
+                        <label for="TenKH">Tên người dùng:</label>
+                        <div class="name-p">
+                            @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="DiaChi">Địa chỉ:</label>
-                    <div class="name-p">
-                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="sdt">Số điện thoại:</label>
+                        <div class="name-p">
+                            @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <div class="name-p">
-                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="DiaChi">Địa chỉ:</label>
+                        <div class="name-p">
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group name">
-                    <label for="NgaySinh">Ngày Sinh:</label>
-                    <div class="name-p">
-                        @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <div class="name-p">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group name">
-                    <label for="Hinh">Hình ảnh:</label>
-                    <div class="name-p">
-                        @Html.EditorFor(model => model.Hinh, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger" })
+                    <div class="form-group name">
+                        <label for="NgaySinh">Ngày Sinh:</label>
+                        <div class="name-p">
+                            @*@Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })*@
+                            if (User.IsInRole("Admin"))
+                            {
+                            @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                            }
+                            else
+                            {
+                            @Html.DisplayFor(model => model.Roleuser)
+                            }
+                        </div>
                     </div>
+
+
+                    <div class="form-group name">
+                        <label for="RoleUser">Quyền truy cập:</label>
+                        <div class="name-p">
+                            @Html.EditorFor(model => model.Roleuser, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Roleuser, "", new { @class = "text-danger" })
+
+                            @*@{
+                                    if (!User.IsInRole("Admin"))
+                                    {
+                                        @Html.EditorFor(model => model.Roleuser, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Roleuser, "", new { @class = "text-danger" })
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(model => model.Roleuser)
+                                    }
+                                }*@
+                        </div>
+                    </div>
+                    @*<div class="form-group name">
+                            <label for="Hinh">Hình ảnh:</label>
+                            <div class="name-p">
+                                @Html.EditorFor(model => model.Hinh, new { htmlAttributes = new { @class = "form-control" } })
+                                <input type="file" name="Hinh" accept="image/*" />
+                                @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    <button class="btn draw-border">Lưu Thông Tin</button>
+                    <a href="/SanPhams/Index">
+                        <button class="btn draw-border">Trang chủ</button>
+                    </a>
                 </div>
-                <button class="btn draw-border">Lưu Thông Tin</button>
-            </div>
             }
         </div>
     </body>

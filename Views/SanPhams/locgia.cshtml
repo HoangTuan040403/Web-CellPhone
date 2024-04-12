@@ -1,116 +1,217 @@
 ﻿@model IEnumerable<Doanphanmem.Models.SanPham>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "locgia";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<style>
-    :root {
-        --maudo: RGB(255, 205, 210);
-    }
-</style>
-
-
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
-
-
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-    </div>
-
-
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/Image/bg2.png" alt="" class="d-block w-100" style="height: 750px; object-position: center;">
-        </div>
-        <div class="carousel-item active">
-            <img src="~/Image/bg3.png" alt="" class="d-block w-100" style="height: 750px; object-position: center;">
-        </div>
-        <div class="carousel-item active">
-            <img src="~/Image/bg5.png" alt="" class="d-block w-100" style="height: 750px; object-position: center;">
-        </div>
-    </div>
-
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>
-
-
-
-@*danh mục sản phâm*@
-@Html.Action("layloaisp", "SanPhams")
-
-@* loc san pham*@
-
-
-<div class="container-fluid mt-5">
-    <div class="container-fluid  p-3 text-center mt-4" style="background-color: #1A6DFF; color: white; font-size: 20px; font-weight: bold; ">Sản Phẩm</div>
-    <div style="margin-right:50px;margin-top:20px;margin-left:20px;">
-        <button>
-            <a href="@Url.Action("locgia", "SanPhams", new { gia = 7000000 } )"><div class="btn">Dưới 7 triệu </div></a>
-        </button>
-        <button>
-            <a href="@Url.Action("locgia", "SanPhams", new { gia = 4000000 } )"><div class="btn">Dưới 4 triệu </div></a>
-
-        </button>
-    </div>
-    <div class="row mt-3 p-5">
-        @foreach (var sp in Model)
-        {
-            <div class="col-sm-3 mb-4">
-                <div class="card">
-                    <a href="@Url.Action("SP_giamgia", "SanPhams", new { id = sp.MaSP })">
-                        <img src="~/Image/@sp.Hinh1" class="card-img-top" alt="Iphone">
-
-                        <div class="card-body">
-                            <h5 class="card-title">@sp.TenSP</h5>
-                            <p class="card-text">@sp.GiaSp</p>
-                            <div class="row">
-                                <a href="#" class="btn btn-success" style="margin-top: 10px">Thêm vào giỏ hàng</a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Shop Category</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+                    </ol>
+                </nav>
             </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+@*<style>
+        :root {
+            --maudo: RGB(255, 205, 210);
         }
-    </div>
 
-    @*bai báo*@
-    <div class="container-fluid bg-light text-center " style="background-color: #1A6DFF;">Cửa hàng chuyên cung cấp các loại điện thoại mới nhất </div>
+        .card-equal-height {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
 
-    <div class="container pt-5">
-        <div class="row mt-4">
-            <div class="col-sm-6 ">
-                <div class="card">
-                    <img src="~/Image/iphone-14-pro-max-den.png" class="card-img-top" />
-                    <div class="card-body">
-                        <a href="https://vnexpress.net/iphone-15-pro-max-thua-galaxy-s23-ultra-khi-tha-roi-4660100.html" class="card-title ">iPhone 15 Pro Max thua Galaxy S23 Ultra khi thả rơi</a>
-                        <p>iPhone 15 Pro Max bị hư hại nhiều hơn Galaxy S23 Ultra sau bốn lần thả rơi ở các góc khác nhau xuống bề mặt bê tông và thép...</p>
+            .card-equal-height .card-body {
+                flex-grow: 1;
+            }
+    </style>
+
+
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Image/bannernew1.png" alt="" class="d-block w-100" style="height: 450px; object-position: center;">
+            </div>
+            <div class="carousel-item active">
+                <img src="~/Image/bannernew2.png" alt="" class="d-block w-100" style="height: 450px; object-position: center;">
+            </div>
+            <div class="carousel-item active">
+                <img src="~/Image/bannernew3.png" alt="" class="d-block w-100" style="height: 450px; object-position: center;">
+            </div>
+        </div>
+
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>*@
+
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-categories">
+                    <div class="head">Thương hiệu điện thoại</div>
+                    <ul class="main-categories">
+                        <li class="common-filter">
+                            <form action="#">
+                                <ul>
+                                    @Html.Action("layloaisp", "SanPhams")
+                                    @*<li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">Men</label></li>
+                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="brand"><label for="women">Women<span> (3600)</span></label></li>*@
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar-filter">
+                    <div class="top-filter-head">Filter</div>
+                    <div class="common-filter">
+                        <div class="head">Tầm giá</div>
+                        <form action="#">
+                            <ul>
+                                <li class="filter-list">
+                                    <input class="pixel-radio" type="radio" id="apple" name="brand">
+                                    @*<a style="color: #777" href="@Url.Action("locgia", "SanPhams", new { gia = 500000 } )">Dưới 5 triệu</a>*@
+                                    <a href="/SanPhams/locgia?SortPrice=1">Dưới 5 triệu</a>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="common-filter">
+                        <div class="head">Dung lượng</div>
+                        <form action="#">
+                            <ul>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
+                                <li class="filter-list">
+                                    <input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">
+                                        Black
+                                        Leather<span>(29)</span>
+                                    </label>
+                                </li>
+                                <li class="filter-list">
+                                    <input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">
+                                        Black
+                                        with red<span>(19)</span>
+                                    </label>
+                                </li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>
+            <div class="col-xl-9 col-lg-8 col-md-7">
 
-            <div class="col-sm-6 ">
-                <div class="card">
-                    <img src="~/Image/iphone-14-pro-max-den.png" class="card-img-top"> </img>
-                    <div class="card-body">
-                        <a href="https://vnexpress.net/iphone-15-pro-max-thua-galaxy-s23-ultra-khi-tha-roi-4660100.html" class="card-title ">iPhone 15 Pro Max thua Galaxy S23 Ultra khi thả rơi</a>
-                        <p>iPhone 15 Pro Max bị hư hại nhiều hơn Galaxy S23 Ultra sau bốn lần thả rơi ở các góc khác nhau xuống bề mặt bê tông và thép...</p>
+                <!-- Start Best Seller -->
+                <section class="lattest-product-area pb-40 category-list">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            decimal price = (decimal)item.GiaSp;
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card text-center card-product">
+                                    <div class="card-product__img">
+                                        <a href="/SanPhams/Details/@item.MaSP">
+                                            <img style="height:250px; width:250px" class="card-img" src="~/Image/@item.Hinh1" alt="">
+                                        </a>
+                                        <ul class="card-product__imgOverlay">
+                                            <li>
+                                                <a href="@Url.Action("AddProduct","GioHang", new {MaSP=item.MaSP})"><i class="ti-shopping-cart"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>@item.PhanLoai.Tenloai</p>
+                                        <h4 class="card-product__title"><a href="/SanPhams/Details/@item.MaSP">@item.TenSP</a></h4>
+                                        <p class="quantity">Số lượng tồn kho: @Html.DisplayFor(model => item.Soluongton)</p>
+                                        <p class="card-product__price"> @string.Format("{0:#,##0} VND", item.GiaSp * 10)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
                     </div>
-                </div>
+                </section>
+                <!-- End Best Seller -->
             </div>
         </div>
     </div>
-</div>
+</section>
+<!-- ================ category section end ================= -->
+<!-- ================ Blog section start ================= -->
+<section class="blog">
+    <div class="container">
+        <div class="section-intro pb-60px">
+            <h2>Tin tức <span class="section-intro__style">News</span></h2>
+        </div>
 
-<div class="p-5"></div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="card card-blog">
+                    <div class="card-blog__img">
+                        <img class="card-img rounded-0" src="~/Image/ios.jpg" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-blog__title"><a href="https://www.thegioididong.com/tin-tuc/day-la-nhung-thay-doi-trong-ios-17-2-beta-2-1554680">Đây là những thay đổi trong iOS 17.2 Beta 2 mà Apple vừa phát hành công khai</a></h4>
+                        <p>Apple mới đây đã chính thức phát hành công khai phiên bản iOS 17.2 và iPadOS 17.2 Beta 2. Cho phép những người dùng không phải...</p>
+                        <a class="card-blog__link" href="https://www.thegioididong.com/tin-tuc/day-la-nhung-thay-doi-trong-ios-17-2-beta-2-1554680">Read More <i class="ti-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="card card-blog">
+                    <div class="card-blog__img">
+                        <img class="card-img rounded-0" src="~/Image/gg.jpg" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-blog__title"><a href="https://www.thegioididong.com/tin-tuc/google-cap-nhat-giao-dien-moi-cho-chrome-1554619">Google cập nhật giao diện mới, đậm chất Material You cho Chrome</a></h4>
+                        <p>Mới đây, nhiều người dùng Chrome đã được sử dụng giao diện mới trên trình duyệt, một thay đổi mà...</p>
+                        <a class="card-blog__link" href="https://www.thegioididong.com/tin-tuc/google-cap-nhat-giao-dien-moi-cho-chrome-1554619">Read More <i class="ti-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="card card-blog">
+                    <div class="card-blog__img">
+                        <img class="card-img rounded-0" src="~/Image/oppo.jpg" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-blog__title"><a href="https://vnexpress.net/iphone-15-pro-max-thua-galaxy-s23-ultra-khi-tha-roi-4660100.html">OPPO Reno11 Series lộ ảnh render, camera có công nghệ do OPPO phát triển</a></h4>
+                        <p>Sáu tháng sau khi ra mắt dòng OPPO Reno10, OPPO đã có kế hoạch ra mắt thế hệ tiếp theo của dòng máy này...</p>
+                        <a class="card-blog__link" href="https://vnexpress.net/iphone-15-pro-max-thua-galaxy-s23-ultra-khi-tha-roi-4660100.html">Read More <i class="ti-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
 
+
+
+        </div>
+    </div>
+</section>
+<!-- ================ Blog section end ================= -->

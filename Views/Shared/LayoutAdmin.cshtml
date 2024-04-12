@@ -10,8 +10,10 @@
     <link rel="shortcut icon" href="~/Content/Admin/assets/images/logo/favicon.png">
 
     <!-- page css -->
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <!-- Core css -->
     <link href="~/Content/Admin/assets/css/app.min.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="app">
@@ -20,14 +22,14 @@
             <div class="header">
                 <div class="logo logo-dark">
                     <a href="~/Content/Admin/index.html">
-                        <img src="~/Content/Admin/assets/images/logo/logo.png" alt="Logo">
-                        <img class="logo-fold" src="~/Content/Admin/assets/images/logo/logo-fold.png" alt="Logo">
+                        <img src="~/Image/LogoLYT.png" style="height:65px; width:65px" alt="Logo">
+                        <img class="logo-fold" src="~/Image/LogoLYT.png" style="height:65px; width:65px" alt="Logo">
                     </a>
                 </div>
                 <div class="logo logo-white">
                     <a href="~/Content/Admin/index.html">
-                        <img src="~/Content/Admin/assets/images/logo/logo-white.png" alt="Logo">
-                        <img class="logo-fold" src="~/Content/Admin/assets/images/logo/logo-fold-white.png" alt="Logo">
+                        <img src="~/Image/LogoLYT.png" style="height:65px; width:65px" alt="Logo">
+                        <img class="logo-fold" src="~/Image/LogoLYT.png" style="height:65px; width:65px" alt="Logo">
                     </a>
                 </div>
                 <div class="nav-wrap">
@@ -131,7 +133,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
+                                <a href="@Url.Action("Edit", "KhachHang", new { id = Session["UserID"]  })" class="dropdown-item d-block p-h-15 p-v-10">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
                                             <i class="anticon opacity-04 font-size-16 anticon-user"></i>
@@ -158,7 +160,7 @@
                                         <i class="anticon font-size-10 anticon-right"></i>
                                     </div>
                                 </a>
-                                <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
+                                <a href="~/Account/Logout" class="dropdown-item d-block p-h-15 p-v-10">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
                                             <i class="anticon opacity-04 font-size-16 anticon-logout"></i>
@@ -200,7 +202,7 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="/PhanLoaiAd/Index">
+                            <a class="dropdown-toggle" href="/PhanLoaiAdmin/Index">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-appstore"></i>
                                 </span>
@@ -215,14 +217,14 @@
                                 <span class="title">Quản lý đơn hàng</span>
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
+                        @*<li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="/ChiTietDonHang/Index">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-hdd"></i>
                                 </span>
                                 <span class="title">Quản lý chi tiết đơn hàng</span>
                             </a>
-                        </li>
+                        </li>*@
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="/TaiKhoan">
                                 <span class="icon-holder">
@@ -236,17 +238,17 @@
                                 <span class="icon-holder">
                                     <i class="anticon anticon-table"></i>
                                 </span>
-                                <span class="title">Phân quyền</span>
+                                <span class="title">Quản lý thống kê</span>
                                 <span class="arrow">
                                     <i class="arrow-icon"></i>
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/UserIDs/Index">Quản lý nhân viên</a>
+                                    <a href="/ThongKe/Chart_sort">Thống kê doanh thu</a>
                                 </li>
                                 <li>
-                                    <a href="~/Content/Admin/data-table.html">Data Table</a>
+                                    <a href="/ThongKe/Top10KhachHangMuaNhieuNhat">Top khách hàng</a>
                                 </li>
                             </ul>
                         </li>
